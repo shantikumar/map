@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+ <head lang="en">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <title>Neighborhood Map</title>
+   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+   <link rel="stylesheet" href="css/style.css">
+ </head>
+ <body>
+  <nav class="r-menu">
+    <p class="menu-show" id="menuShow">
+      <a href="#!"><i class="fa fa-bars"></i> Discover Vancouver</a>
+    </p>
+    <p class="menu-close" id="closeMenu">
+      <a href="#!"><i class="fa fa-chevron-left"></i> Close</a>
+    </p>
+  </nav>
+  <div id="control-bar" class="side-nav">
+    <div class="heading">
+      <h1>Discover Vancouver</h1>
+      <input id="show-listings" type="button" value="Show Listings" class="button">
+      <input id="hide-listings" type="button" value="Hide Listings" class="button">
+      <!-- <div class="switch">
+        <label>
+          <input type="checkbox">
+          <span class="lever"></span>
+          Show Listings
+        </label>
+      </div> -->
+      <div id="search" class="filter-search">
+   		   <input data-bind="textInput: searchInput" placeholder="Filter location">
+      </div>
+      <div id="locations">
+        <ul data-bind="foreach: searchFilter" id="location-list" class="listings">
+          <li>
+            <a href="#!" data-bind = "text: title, click: $parent.setLocation" data-bind="css: { profitWarning: currentProfit() < 0, majorHighlight: isSevere }"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <main>
+      </div>
+      <div id="map"></div>
+    </main>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script async defer src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDqDR12O1q1kNIMaBLZG9ULeH2zwD21vFc&callback=initMap"></script>
+  <script src="js/knockout.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      $('#closeMenu').hide();
+      
+      $('#menuShow').click(function () {
+        $(this).hide();
+        $('#closeMenu').show();
+        $('.r-menu').animate({left: '375px'}, 350);
+        $('.side-nav').css('display','block');
+      });
+      $('#closeMenu').click(function(){
+        $(this).hide();
+        $('#menuShow').show();
+        $('.r-menu').hide().removeAttr('style');
+        $('.side-nav').css('display','none');
+      });
+      
+      $('.menu-icon').click(function () {
+        $(this).toggleClass("on"); 
+      }); // animation = -> x
+    });
+  </script>
+
+
+ </body>
+</html>
